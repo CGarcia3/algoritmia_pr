@@ -77,26 +77,25 @@ def script2():
     
 
 """I-C. Cuestiones"""
-import Callable
-from sklearn.linear_model import LinearRegression
 
-    def fit_func_2_times(timings: np.ndarray, func_2_fit: Callable):
-        """Ajusta linealmente los valores de la funcion func_2_fit a
-        los tiempos en timings.
-        Esto es, calculamos valores a, b para que la funcion a*f(dim) + b
-        se ajuste a los tiempos medidos.
-        """
-        if len(timings.shape) == 1:
-            timings = timings.reshape(-1, 1)
-        values = func_2_fit(timings[ :, 0]).reshape(-1, 1)
-        
-        #normalizar timings
-        times = timings[ : , 1] / timings[0, 1]
-        
-        #ajustar a los valores en times un modelo lineal sobre los valores en values
-        lr_m = LinearRegression()
-        lr_m.fit(values, times)
-        return lr_m.predict(values)
+
+def fit_func_2_times(timings: np.ndarray, func_2_fit: Callable):
+    """Ajusta linealmente los valores de la funcion func_2_fit a
+    los tiempos en timings.
+    Esto es, calculamos valores a, b para que la funcion a*f(dim) + b
+    se ajuste a los tiempos medidos.
+    """
+    if len(timings.shape) == 1:
+        timings = timings.reshape(-1, 1)
+    values = func_2_fit(timings[ :, 0]).reshape(-1, 1)
+    
+    #normalizar timings
+    times = timings[ : , 1] / timings[0, 1]
+    
+    #ajustar a los valores en times un modelo lineal sobre los valores en values
+    lr_m = LinearRegression()
+    lr_m.fit(values, times)
+    return lr_m.predict(values)
 
 def func_2_fit(n):
 
@@ -105,3 +104,66 @@ def func_2_fit(n):
     
     # IDEA2: Devolver valores de tiempo
     return ...   
+
+
+"""II-A. Min Heaps sobre arrays de Numpy"""
+
+def min_heapify(h: np.darray, i: int):
+    left_child = 2*i+1
+    right_child = 2*i+2 
+    while  left_child < len(h):
+        aux = i
+        if h[aux] > h[left_child]:
+            aux = left_child
+        if (right_child) < len(h) and h[aux] > h[right_child]:
+            aux = right_child
+        if aux > i:
+            h[i], h[aux] = h[aux], h[i]
+            i = aux
+        else:
+            return 
+            
+
+def insert_min_heap(h: np.darray, k: int) -> np.darray:
+    h += [k]
+    i = len(h) - 1
+    
+    while j >= 1 and h[(i-1) // 2] > h[i]:
+        h[(i-1) // 2], h[i] = h[i], h[(i-1) // 2]
+        i = (i-1) // 2
+
+    return h
+
+
+def create_min_heap(h: np.darray):
+    aux = np.empty(len(h))
+
+    for i in range(len(h)):
+        aux[i] = h[i]
+        min_heapify(aux, i)
+
+    h = aux
+
+
+
+"""II-B. Colas de prioridad sobre min Heaps"""
+
+def pq_ini():
+    p_queue = []
+
+def pq_insert(h: np.darray, k:int) -> np.darray:
+    h.append(k)
+    return h
+
+def pq_remove(h: np.darray) -> np.darray:
+    i_max = 0
+    for i in range(len(h)):
+        if h[i] > h[i_max]:
+            i_max = i
+
+    elem = h[i_max]
+    del h[i_max]
+
+    return elem, h
+    
+
