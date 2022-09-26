@@ -1,0 +1,12 @@
+{
+    "jupyter.kernels.filter": [
+        {
+            "path": "/opt/anaconda3.5/bin/python",
+            "type": "pythonEnvironment"
+        },
+        {
+            "path": "/usr/bin/python",
+            "type": "pythonEnvironment"
+        }
+    ]
+}

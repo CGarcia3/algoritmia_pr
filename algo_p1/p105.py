@@ -1,6 +1,7 @@
 from timeit import timeit
 import numpy as np
 import timeit
+from typing import Callable
 
 """ I-A. Midiendo tiempos con %timeit """
 
@@ -17,7 +18,7 @@ def matrix_multiplication(m_1: np.ndarray, m_2: np.ndarray)-> np.ndarray:
             res[i][j] = sum
 
     return res
-
+"""
 if __name__=="__main__":
     l_timings = []
     
@@ -28,7 +29,7 @@ if __name__=="__main__":
         l_timings.append([dim, timings.best])
 
     print(l_timings)
-
+"""
 
 """ I-B. Busqueda binaria """
 
@@ -64,7 +65,7 @@ def bb(t: list, f: int, l: int, key: int)-> int:
     
     return index
 
-
+"""
 def script2():
     l_times = []
     for i, size in enumerate(range(5, 15)):
@@ -74,7 +75,7 @@ def script2():
         l_times.append([len(t), timings.best])
         times = np.array(l_times)
     print(l_times)
-    
+"""    
 
 """I-C. Cuestiones"""
 
@@ -85,7 +86,7 @@ def fit_func_2_times(timings: np.ndarray, func_2_fit: Callable):
     Esto es, calculamos valores a, b para que la funcion a*f(dim) + b
     se ajuste a los tiempos medidos.
     """
-    if len(timings.shape) == 1:
+    """if len(timings.shape) == 1:
         timings = timings.reshape(-1, 1)
     values = func_2_fit(timings[ :, 0]).reshape(-1, 1)
     
@@ -95,7 +96,8 @@ def fit_func_2_times(timings: np.ndarray, func_2_fit: Callable):
     #ajustar a los valores en times un modelo lineal sobre los valores en values
     lr_m = LinearRegression()
     lr_m.fit(values, times)
-    return lr_m.predict(values)
+    return lr_m.predict(values)"""
+    pass
 
 def func_2_fit(n):
 
@@ -103,12 +105,12 @@ def func_2_fit(n):
     # en y el tiempo que tarda en realizar la multiplicacion
     
     # IDEA2: Devolver valores de tiempo
-    return ...   
+    pass
 
 
 """II-A. Min Heaps sobre arrays de Numpy"""
 
-def min_heapify(h: np.darray, i: int):
+def min_heapify(h: np.ndarray, i: int):
     left_child = 2*i+1
     right_child = 2*i+2 
     while  left_child < len(h):
@@ -124,18 +126,20 @@ def min_heapify(h: np.darray, i: int):
             return 
             
 
-def insert_min_heap(h: np.darray, k: int) -> np.darray:
+def insert_min_heap(h: np.ndarray, k: int) -> np.ndarray:
+    if h == None:
+        h = []
     h += [k]
     i = len(h) - 1
     
-    while j >= 1 and h[(i-1) // 2] > h[i]:
+    while i >= 1 and h[(i-1) // 2] > h[i]:
         h[(i-1) // 2], h[i] = h[i], h[(i-1) // 2]
         i = (i-1) // 2
 
     return h
 
 
-def create_min_heap(h: np.darray):
+def create_min_heap(h: np.ndarray):
     aux = np.empty(len(h))
 
     for i in range(len(h)):
@@ -151,19 +155,32 @@ def create_min_heap(h: np.darray):
 def pq_ini():
     p_queue = []
 
-def pq_insert(h: np.darray, k:int) -> np.darray:
+def pq_insert(h: np.ndarray, k:int) -> np.ndarray:
+    if h == None:
+        h=[]
     h.append(k)
     return h
 
-def pq_remove(h: np.darray) -> np.darray:
-    i_max = 0
+def pq_remove(h: np.ndarray) -> np.ndarray:
+    if h == None:
+        return None
+    i_min = 0
     for i in range(len(h)):
-        if h[i] > h[i_max]:
-            i_max = i
+        if h[i] < h[i_min]:
+            i_min = i
 
-    elem = h[i_max]
-    del h[i_max]
+    elem = h[i_min]
+    del h[i_min]
 
     return elem, h
     
+"""II-C. El problema de seleccion"""
 
+def select_min_heap(h: np.ndarray, k:int) -> int:
+    if h == None:
+        return -1
+
+    create_min_heap(h)
+    elem, h = pq_remove(h) 
+
+    return elem
