@@ -177,10 +177,7 @@ def create_min_heap(h: np.ndarray):
 
     """Create the min heap"""
     for i in range(len(h)):
-        aux[i] = h[i]
-        min_heapify(aux, i)
-
-    h = aux
+        min_heapify(h, i)
 
 
 
@@ -229,11 +226,21 @@ Function that selects the element k in a disordered array
 """
 def select_min_heap(h: np.ndarray, k:int) -> int:
     """Check if the array is empty"""
-    if h == None:
+    if h is None:
         return -1
 
-    """Create a min heap and get the element with the least priority"""
-    create_min_heap(h)
-    elem, h = pq_remove(h) 
+    """Change the array to its negative to work with min heap"""
+    neg = -1
+    aux = neg*np.array(h)
+    heap = aux[:k]
 
-    return elem
+    """"""
+    create_min_heap(heap)
+    for i in range(k, len(h)):
+        if aux[i] > heap[0]:
+            heap[0] = aux[i]
+            min_heapify(heap, 0)
+    
+    return neg*heap[0]
+    
+    

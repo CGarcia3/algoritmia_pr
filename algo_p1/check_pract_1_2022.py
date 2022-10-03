@@ -8,7 +8,7 @@ import os
 
 import numpy as np
 
-import algo_p1.p105 as p1
+import algo_p1.p105.p105 as p1
   
 ####################################### main
 def main(t_size: int):
@@ -147,7 +147,7 @@ if __name__ == '__main__':
                 sys.exit("file {0:s} not found".format(f_path))
         
         else:
-            import algo_p1.p105 as p1 
+            import algo_p1.p105.p105 as p1 
             
         main(args.size)
     
