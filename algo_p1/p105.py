@@ -5,11 +5,18 @@ from typing import Callable
 
 """ I-A. Midiendo tiempos con %timeit """
 
+"""
+Function that receives two matrix and perform the multiplication
+"""
 def matrix_multiplication(m_1: np.ndarray, m_2: np.ndarray)-> np.ndarray:
+    """Check the dimensions to see if they can be multiplied"""
     if(m_1.shape[1]!=m_2.shape[0]):
         return None
 
-    res = np.ndarray((m_1.shape[0], m_2.shape[1])) #m_1.rows, m_2.columns
+    """m_1.rows, m_2.columns"""
+    res = np.ndarray((m_1.shape[0], m_2.shape[1])) 
+
+    """Do the multiplication"""
     for i in range(m_1.shape[0]):
         for j in range(m_2.shape[1]):
             sum=0
@@ -33,13 +40,18 @@ if __name__=="__main__":
 
 """ I-B. Busqueda binaria """
 
+"""
+Recursive version of binary search
+"""
 def rec_bb(t: list, f: int, l: int, key: int)-> int:
     if f>l:
         return None
 
+    """Get the number that is at the middle of the list"""
     index = int(round((f+l)/2))
     aux=t[index]
     
+    """Perform the binary search"""
     if aux==key:
         return index
     elif aux<key:
@@ -47,13 +59,18 @@ def rec_bb(t: list, f: int, l: int, key: int)-> int:
     else:
         return rec_bb(t, f, index-1, key)
 
-        
+
+"""
+Iterative version of binary search
+"""  
 def bb(t: list, f: int, l: int, key: int)-> int:
     if f>l:
         return None
 
+    """Get the number that is at the middle of the list"""
     index = int(round((f+l)/2))
     
+    """Perform the binary search"""
     while t[index]!=key:
         if t[index]<key:
             f=index+1
@@ -110,9 +127,15 @@ def func_2_fit(n):
 
 """II-A. Min Heaps sobre arrays de Numpy"""
 
+"""
+Function that applies heapify operation to an element in position i 
+"""
 def min_heapify(h: np.ndarray, i: int):
+    """Define the child nodes in the array"""
     left_child = 2*i+1
     right_child = 2*i+2 
+
+    """Perform heapify operation"""
     while  left_child < len(h):
         aux = i
         if h[aux] > h[left_child]:
@@ -126,12 +149,20 @@ def min_heapify(h: np.ndarray, i: int):
             return 
             
 
+"""
+Function that inserts an element in a min heap and 
+returns the heap with the element inserted
+"""
 def insert_min_heap(h: np.ndarray, k: int) -> np.ndarray:
+
+    """Check if the array is empty"""
     if h == None:
         h = []
+
     h += [k]
     i = len(h) - 1
     
+    """Insert the element in the heap"""
     while i >= 1 and h[(i-1) // 2] > h[i]:
         h[(i-1) // 2], h[i] = h[i], h[(i-1) // 2]
         i = (i-1) // 2
@@ -139,9 +170,12 @@ def insert_min_heap(h: np.ndarray, k: int) -> np.ndarray:
     return h
 
 
+"""Function that creates a min heap from an array"""
 def create_min_heap(h: np.ndarray):
+    """Create an empty array"""
     aux = np.empty(len(h))
 
+    """Create the min heap"""
     for i in range(len(h)):
         aux[i] = h[i]
         min_heapify(aux, i)
@@ -152,19 +186,33 @@ def create_min_heap(h: np.ndarray):
 
 """II-B. Colas de prioridad sobre min Heaps"""
 
+"""
+Function that initializes a priority queue
+"""
 def pq_ini():
     p_queue = []
 
+"""
+Function that inserts an element k in a priority queue
+"""
 def pq_insert(h: np.ndarray, k:int) -> np.ndarray:
+    """Check if the array is empty"""
     if h == None:
         h=[]
     h.append(k)
     return h
 
+"""
+Function that removes the element with the least priority
+in a priority queue
+"""
 def pq_remove(h: np.ndarray) -> np.ndarray:
+    """Check if the array is empty"""
     if h == None:
         return None
     i_min = 0
+
+    """Search the element with the least priority"""
     for i in range(len(h)):
         if h[i] < h[i_min]:
             i_min = i
@@ -176,10 +224,15 @@ def pq_remove(h: np.ndarray) -> np.ndarray:
     
 """II-C. El problema de seleccion"""
 
+"""
+Function that selects the element k in a disordered array
+"""
 def select_min_heap(h: np.ndarray, k:int) -> int:
+    """Check if the array is empty"""
     if h == None:
         return -1
 
+    """Create a min heap and get the element with the least priority"""
     create_min_heap(h)
     elem, h = pq_remove(h) 
 
