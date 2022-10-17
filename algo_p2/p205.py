@@ -1,9 +1,25 @@
 import numpy as np
 from typing import Callable
-if __name__=="__main__":
-    print (-1*np.ones(3, int))
-    for n in -1*np.ones(3, int):
-        print (n)
+
+def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
+    x=np.array(np.random.randint(1,w_max, size=(n_nodes,n_nodes)))
+    np.fill_diagonal(x, 0, False)
+    return x
+
+def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
+    return
+
+def len_circuit(circuit: list, dist_m: np.ndarray)-> int:
+    return 
+
+def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
+    return
+
+def exhaustive_greedy_tsp(dist_m: np.ndarray)-> list:
+    return
+
+
+
 
 def init_cd(n:int) -> np.ndarray:
     if n <= 0:
@@ -53,6 +69,56 @@ def find(ind:int, p_set:np.ndarray) -> int:
         ind = y
 
     return z
+     
 
 def cd_2_dict(p_set:np.ndarray) -> dict:
-    pass
+    
+    myDict = {}
+    myList = []
+
+    #Error control
+    if p_set is None:
+        print("Array is none")
+        return -1
+
+    #Iterate through the set to get the keys
+    for indice, value in enumerate(p_set):
+        if value < 0:
+            myList.append(indice)
+            myDict[indice] = myList
+    
+    #Iterate to get the values of the set
+    for i in range(len(p_set)):
+        for key in myDict:
+            if (p_set[i] == key):
+                myList.append(i)
+                myDict.update({key:myList})
+
+    return myDict
+
+
+
+if __name__=="__main__":
+
+    myDict = {}
+    arr = init_cd(8)
+
+    x = union(2, 1, arr)
+    y = union(0, x, arr)
+    z = union(y, 3, arr)
+
+    a = union(7, 6, arr)
+    b = union(4, a, arr)
+
+
+    print(arr)
+
+    myDict = cd_2_dict(arr)
+
+    print(myDict)
+
+
+
+
+
+
