@@ -1,7 +1,11 @@
 import numpy as np
 from typing import Callable
 
+
 def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
+    """
+    
+    """
     arr = np.ndarray(shape=(n_nodes,n_nodes), dtype=int)
     for i in range(n_nodes):
         for j in range(n_nodes):
@@ -14,6 +18,7 @@ def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
 
     return arr
 
+
 def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
     path = list()
     path.append(node_ini)
@@ -22,10 +27,10 @@ def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
     current = node_ini
     aux = -1
     while True:
-        final_cost = np.Infinity
+        min_cost = np.Infinity
         for node, cost in enumerate(dist_m[current]):
-            if cost > 0 and cost < final_cost and node not in path:
-                final_cost = cost
+            if cost > 0 and cost < min_cost and node not in path:
+                min_cost = cost
                 aux = node
 
         current = aux
@@ -45,7 +50,7 @@ def len_circuit(circuit: list, dist_m: np.ndarray)-> int:
 def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
     min = np.Infinity
     ret = list()
-    list1=list()
+    list1 = list()
     for node in range(len(dist_m[0])):
         list1 = greedy_tsp(dist_m, node)
         size = len_circuit(list1, dist_m)
@@ -128,31 +133,35 @@ def cd_2_dict(p_set:np.ndarray) -> dict:
     #Iterate to get the values of the set
     for i in range(len(p_set)):
         j = find(i, p_set)
-        print("parent:{}\tchild{}".format(j, i))
         myDict[j].append(i)
 
     return myDict
 
+def ccs(n:int, l:list) -> dict:
+    k = 0
+    myDict = {}
+    
+    #Initialize the CD
+    arr = init_cd(n)
+
+    #Iterate through the list, find the representatives 
+    #of each node of the tuple and check if they belong
+    #to the same set, if not , unify them
+    for n in l:
+        i = find(n[0], arr)
+        j = find(n[1], arr)
+        if (i != j):
+            k = union(n[0], n[1], arr)
+
+    myDict = cd_2_dict(arr)
+
+    return myDict
 
 if __name__=="__main__":
 
     myDict = {}
-    arr = init_cd(9)
-
-    """x = union(2, 1, arr)
-    y = union(0, x, arr)
-    z = union(y, 3, arr)
-    w = union(8, 3, arr)
-
-    a = union(7, 6, arr)
-    b = union(4, a, arr)"""
-
-    arr = [2, 2, -4, 1, 7, -1, 7, -3, 3]
-
-
-    print(arr)
-
-    myDict = cd_2_dict(arr)
+    myList = [(0, 2), (1, 3), (2, 3), (2, 4), (3, 4), (5, 6), (5, 7), (6, 8)]
+    myDict = ccs(9, myList)
 
     print(myDict)
 

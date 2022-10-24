@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Callable
-
+import itertools as it
 
 def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
     arr = np.ndarray(shape=(n_nodes,n_nodes), dtype=int)
@@ -19,14 +19,13 @@ def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
     path = list()
     path.append(node_ini)
 
-    print(dist_m)
     current = node_ini
     aux = -1
     while True:
-        final_cost = np.Infinity
+        min_cost = np.Infinity
         for node, cost in enumerate(dist_m[current]):
-            if cost > 0 and cost < final_cost and node not in path:
-                final_cost = cost
+            if cost > 0 and cost < min_cost and node not in path:
+                min_cost = cost
                 aux = node
 
         current = aux
@@ -46,7 +45,7 @@ def len_circuit(circuit: list, dist_m: np.ndarray)-> int:
 def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
     min = np.Infinity
     ret = list()
-    list1=list()
+    list1 = list()
     for node in range(len(dist_m[0])):
         list1 = greedy_tsp(dist_m, node)
         size = len_circuit(list1, dist_m)
@@ -57,11 +56,24 @@ def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
     return ret
 
 def exhaustive_greedy_tsp(dist_m: np.ndarray)-> list:
-    return
+    circ = list()    
+    ret = list()
+    l = it.permutations(range(len(dist_m[0])))
+    min = np.Infinity
+    for i in l:
+        x = list(i)
+        x.append(x[0])
+
+        cost = len_circuit(x, dist_m)
+        print(x, cost)
+        if cost < min:
+            min = cost
+            ret = x
+    print(ret, min)
+    return ret
+
 
 
 if __name__=="__main__":
-    x=dist_matrix(5, 100)
-    print(x)
-    r = repeated_greedy_tsp(x)
-    print(r)
+    x=dist_matrix(4, 10)
+    z=exhaustive_greedy_tsp(x)
