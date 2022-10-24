@@ -2,18 +2,58 @@ import numpy as np
 from typing import Callable
 
 def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
-    x=np.array(np.random.randint(1,w_max, size=(n_nodes,n_nodes)))
-    np.fill_diagonal(x, 0, False)
-    return x
+    arr = np.ndarray(shape=(n_nodes,n_nodes), dtype=int)
+    for i in range(n_nodes):
+        for j in range(n_nodes):
+            if i!=j:
+                x=np.random.randint(1, w_max)
+                arr[i][j] = x
+                arr[j][i] = x
+            else:
+                arr[i][j] = 0
+
+    return arr
 
 def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
-    return
+    path = list()
+    path.append(node_ini)
+
+    print(dist_m)
+    current = node_ini
+    aux = -1
+    while True:
+        final_cost = np.Infinity
+        for node, cost in enumerate(dist_m[current]):
+            if cost > 0 and cost < final_cost and node not in path:
+                final_cost = cost
+                aux = node
+
+        current = aux
+        path.append(current)
+
+        if len(path) == len(dist_m[node_ini]):
+            path.append(node_ini)
+            break 
+    return path
 
 def len_circuit(circuit: list, dist_m: np.ndarray)-> int:
-    return 
+    sum = 0
+    for index in range(1, len(circuit)):
+        sum += dist_m[circuit[index-1]][circuit[index]]
+    return sum
 
 def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
-    return
+    min = np.Infinity
+    ret = list()
+    list1=list()
+    for node in range(len(dist_m[0])):
+        list1 = greedy_tsp(dist_m, node)
+        size = len_circuit(list1, dist_m)
+        print("Path: {}\nCost: {}".format(list1, size))
+        if size < min:
+            min = size
+            ret = list1
+    return ret
 
 def exhaustive_greedy_tsp(dist_m: np.ndarray)-> list:
     return
@@ -74,7 +114,6 @@ def find(ind:int, p_set:np.ndarray) -> int:
 def cd_2_dict(p_set:np.ndarray) -> dict:
     
     myDict = {}
-    myList = []
 
     #Error control
     if p_set is None:
@@ -84,31 +123,31 @@ def cd_2_dict(p_set:np.ndarray) -> dict:
     #Iterate through the set to get the keys
     for indice, value in enumerate(p_set):
         if value < 0:
-            myList.append(indice)
-            myDict[indice] = myList
+            myDict[indice] = []
     
     #Iterate to get the values of the set
     for i in range(len(p_set)):
-        for key in myDict:
-            if (p_set[i] == key):
-                myList.append(i)
-                myDict.update({key:myList})
+        j = find(i, p_set)
+        print("parent:{}\tchild{}".format(j, i))
+        myDict[j].append(i)
 
     return myDict
-
 
 
 if __name__=="__main__":
 
     myDict = {}
-    arr = init_cd(8)
+    arr = init_cd(9)
 
-    x = union(2, 1, arr)
+    """x = union(2, 1, arr)
     y = union(0, x, arr)
     z = union(y, 3, arr)
+    w = union(8, 3, arr)
 
     a = union(7, 6, arr)
-    b = union(4, a, arr)
+    b = union(4, a, arr)"""
+
+    arr = [2, 2, -4, 1, 7, -1, 7, -3, 3]
 
 
     print(arr)
