@@ -46,7 +46,7 @@ def main():
     g = []
     g = [(0, 2), (1, 3), (2, 3), (2, 4), (3, 4), (5, 6), (5, 7), (6, 8)]
     g = [(0, 12), (10, 0), (7, 12), (1, 9), (3, 8), (3, 9), (11, 6), (2, 5), (4, 5), (0, 2)]
-    d_cc = p2.connected_comps(13, g)
+    d_cc = p2.ccs(13, g)
     print(d_cc)
     
     _ = input("\npulsar Intro para continuar " + 20*'.' + "\n")
@@ -68,7 +68,7 @@ def main():
     [1, 2, 1, 0]])
     
     #coger uno
-    dist_m = dist_bmsv
+    dist_m = dist_simple
     print("graph_matrix\n", dist_m)
     
     circuit = p2.greedy_tsp(dist_m)
