@@ -7,7 +7,7 @@ import textwrap
 
 import numpy as np
 
-#import p100 as p1
+import p205 as p2
   
 ####################################### main
 def main():
@@ -68,7 +68,7 @@ def main():
     [1, 2, 1, 0]])
     
     #coger uno
-    dist_m = dist_simple
+    dist_m = dist_bmsv
     print("graph_matrix\n", dist_m)
     
     circuit = p2.greedy_tsp(dist_m)
@@ -160,7 +160,7 @@ if __name__ == '__main__':
                 sys.exit("file {0:s} not found".format(f_path))
         
         else:
-            import p200 as p2
+            import p205 as p2
             print('here')
             
         main()

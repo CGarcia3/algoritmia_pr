@@ -142,7 +142,7 @@ if __name__ == '__main__':
                 str_comm = "cp ./p1" + args.pareja + "/graphs" + args.pareja + ".py  ./grafos.py"
                 print(str_comm)
                 os.system(str_comm)
-                import grafos as gr
+                import grafos as ºº
             else:
                 sys.exit("file {0:s} not found".format(f_path))
         

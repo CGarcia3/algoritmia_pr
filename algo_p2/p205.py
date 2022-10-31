@@ -1,11 +1,8 @@
 import numpy as np
 from typing import Callable
-
+import itertools as it
 
 def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
-    """
-    
-    """
     arr = np.ndarray(shape=(n_nodes,n_nodes), dtype=int)
     for i in range(n_nodes):
         for j in range(n_nodes):
@@ -18,12 +15,10 @@ def dist_matrix(n_nodes:int, w_max:int)->np.ndarray:
 
     return arr
 
-
 def greedy_tsp(dist_m: np.ndarray, node_ini=0)-> list:
     path = list()
     path.append(node_ini)
 
-    print(dist_m)
     current = node_ini
     aux = -1
     while True:
@@ -60,8 +55,22 @@ def repeated_greedy_tsp(dist_m: np.ndarray)-> list:
             ret = list1
     return ret
 
-def exhaustive_greedy_tsp(dist_m: np.ndarray)-> list:
-    return
+def exhaustive_tsp(dist_m: np.ndarray)-> list:
+    circ = list()    
+    ret = list()
+    l = it.permutations(range(len(dist_m[0])))
+    min = np.Infinity
+    for i in l:
+        x = list(i)
+        x.append(x[0])
+
+        cost = len_circuit(x, dist_m)
+        #print(x, cost)
+        if cost < min:
+            min = cost
+            ret = x
+    #print(ret, min)
+    return ret
 
 
 
@@ -137,7 +146,7 @@ def cd_2_dict(p_set:np.ndarray) -> dict:
 
     return myDict
 
-def ccs(n:int, l:list) -> dict:
+def connected_comps(n:int, l:list) -> dict:
     k = 0
     myDict = {}
     
