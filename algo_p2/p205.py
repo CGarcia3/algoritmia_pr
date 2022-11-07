@@ -100,7 +100,7 @@ def exhaustive_tsp(dist_m: np.ndarray) -> list:
     ret = list()
     li = it.permutations(range(len(dist_m[0])))
     min = np.Infinity
-    for i in l:
+    for i in li:
         x = list(i)
         x.append(x[0])
 
