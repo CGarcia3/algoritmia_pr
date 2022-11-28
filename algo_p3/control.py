@@ -163,28 +163,7 @@ def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
 
     if len(t) == 1:
         return t[0]
-    
-    m = -1
-    while k != len(t):
-        p = pivot5(t)
-        
-        if p is None:
-            return None
-        p = int(p)
-
-        arr_left, p, arr_right = split_pivot(t, p)
-        m = len(arr_left)
-
-        if k == m:
-            break
-        if k < m:
-            t = arr_left
-        elif k > m:
-            t = arr_right
-            k = k-m-1
-       
-    return p
-    """else:
+    else:
         p = pivot5(t)
         if p is None:
             return None
@@ -200,7 +179,7 @@ def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
         elif k > m:
             ret = qsel5_nr(arr_right, k-m-1)
 
-    return ret"""
+    return ret
 
 def qsort5_5(t: np.ndarray) -> np.ndarray:
     pass
@@ -230,14 +209,15 @@ if __name__ == "__main__":
         arr = np.random.permutation(100)
         print(arr)
         for key in range(100):
-            f = qsel5_nr(arr, key)
+            f = qsel_nr(arr, key)
             print(f, key)
             if f != key:
                 print("Error qsel_nr. ", f, key)
                 time.sleep(10)
 
 """
-[6 3 2 5 0 4 7 9 8 1]
-[4 7 1 2 5 8 6 9 0 3]
-[5 7 8 9 4 2 0 6 3 1]
+[7 1 9 6 5 3 0 4 2 8]
+[4 6 8 2 5 7 9 0 3 1]
+[9 1 0 3 5 7 6 4 8 2]
+[4 3 7 1 6 9 8 0 5 2]
 """
