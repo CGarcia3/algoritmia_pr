@@ -151,6 +151,7 @@ def pivot5(t: np.ndarray) -> int:
 
     return pivot
 
+
 def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
 
     if (t is None):
@@ -163,7 +164,28 @@ def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
 
     if len(t) == 1:
         return t[0]
-    else:
+    
+    m = -1
+    while k != len(t):
+        p = pivot5(t)
+        
+        if p is None:
+            return None
+        p = int(p)
+
+        arr_left, p, arr_right = split_pivot(t, p)
+        m = len(arr_left)
+
+        if k == m:
+            break
+        if k < m:
+            t = arr_left
+        elif k > m:
+            t = arr_right
+            k = k-m-1
+       
+    return p
+    """else:
         p = pivot5(t)
         if p is None:
             return None
@@ -179,7 +201,7 @@ def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
         elif k > m:
             ret = qsel5_nr(arr_right, k-m-1)
 
-    return ret
+    return ret"""
 
 def qsort5_5(t: np.ndarray) -> np.ndarray:
     pass
