@@ -18,7 +18,7 @@ def split(t: np.ndarray) -> Tuple[np.ndarray, int, np.ndarray]:
     """
 
     if (t is None):
-        print("Array is empty")
+        #print("Array is empty")
         return None
 
     p = t[0]
@@ -39,8 +39,8 @@ def qsel(t: np.ndarray, k: int) -> Union[int, None]:
     **Return:** int (element in the k-th position)
     """
 
-    if (k < 0 or t is None):
-        print("K is smaller than 0 or array is empty")
+    if (k < 0 or t is None or k > len(t)-1):
+        #print("K is smaller than 0 or array is empty")
         return None
 
     if len(t) == 1:
@@ -67,11 +67,11 @@ def qsel_nr(t: np.ndarray, k: int) -> Union[int, None]:
 
     **Return:** int (element in the k-th position)
     """
-
+    p = None
     m = -1
     while k != len(t): 
-        if (k < 0 or t is None):
-            print("K is smaller than 0 or array is empty")
+        if (k < 0 or t is None or k > len(t)-1):
+            #print("K is smaller than 0 or array is empty")
             return None
 
         if len(t) == 1:
@@ -79,8 +79,6 @@ def qsel_nr(t: np.ndarray, k: int) -> Union[int, None]:
             
         arr_left, p, arr_right = split(t)
         m = len(arr_left)
-        #print("This is k: "+ str(k))
-        #print("This is p: "+str(p))
 
         if k == m:
             break
@@ -108,7 +106,7 @@ def split_pivot(t: np.ndarray, mid: int) -> Tuple[np.ndarray, int, np.ndarray]:
     """
     
     if (t is None or mid < 0):
-        print("Array is empty or non valid mid value")
+        #print("Array is empty or non valid mid value")
         return None
 
     arr_left = [u for u in t if u < mid]
@@ -120,7 +118,7 @@ def split_pivot(t: np.ndarray, mid: int) -> Tuple[np.ndarray, int, np.ndarray]:
 def pivot5(t: np.ndarray) -> int:
     #Hay que llamar a qsel5 cuando tengas el array de medians para que se haga en qsel5
     if t is None or len(t) == 0:
-        print("Array is empty")
+        #print("Array is empty")
         return None
     
     if len(t) < 5:
@@ -154,10 +152,10 @@ def pivot5(t: np.ndarray) -> int:
 def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
 
     if (t is None):
-        print("Array is empty or non valid mid value")
+        #print("Array is empty or non valid mid value")
         return None
     if  k < 0 or k >= len(t):
-        print("Non valid k ", t, k)
+        #print("Non valid k ", t, k)
         return None
 
 
@@ -184,27 +182,50 @@ def qsel5_nr(t: np.ndarray, k: int) -> Union[int, None]:
             k = k-m-1
        
     return p
-    """else:
-        p = pivot5(t)
-        if p is None:
-            return None
-        p = int(p)
 
-        arr_left, p, arr_right = split_pivot(t, p)
-        m = len(arr_left)
+def qsort_5(t: np.ndarray) -> np.ndarray:
+    aux = np.zeros(len(t), dtype=int)
+    for elem in t:
+        index = qsel5_nr(t, elem)
+        aux[index] = elem
+    return aux
 
-        if k == m:
-            ret = p
-        elif k < m:
-            ret = qsel5_nr(arr_left, k)
-        elif k > m:
-            ret = qsel5_nr(arr_right, k-m-1)
+def edit_distance(str1:str, str2:str)->int:
+    """ Calculate edit distance between sequences x and y using
+    matrix dynamic programming. Return dist matrix. """
+    
+    dist = np.zeros((len(str1)+1, len(str2)+1), dtype=int)
+    dist[0, 1:] = range(1, len(str2)+1)
+    dist[1:, 0] = range(1, len(str1)+1)
+    
+    for i in range(1, len(str1)+1):
+        for j in range(1, len(str2)+1):
+            # str1[i] == str2[j]
+            if (str1[i-1] == str2[j-1]):
+                dist[i,j] = dist[i-1, j-1]
+                
+            # str1[i] != str2[j]
+            else :
+                dist[i, j] = min(dist[i-1, j-1]+1, dist[i-1, j]+1, dist[i, j-1]+1)
+    
+    return dist[-1,-1]
 
-    return ret"""
-
-def qsort5_5(t: np.ndarray) -> np.ndarray:
-    pass
-
+def max_subsequence_length(x:str, y:str)->int:
+    """ Calculate  the LCS length between sequences x and y using
+    matrix dynamic programming. Return matrix. """
+    
+    e = np.zeros((len(x)+1, len(y)+1), dtype=int)
+    
+    for i in range(1, len(x)+1):
+        for j in range(1, len(y)+1):
+            # x[i] == y[j]
+            if (x[i-1] == y[j-1]):
+                e[i,j] = 1 + e[i-1, j-1]
+                
+            # x[i] != y[j]    
+            else :
+                e[i, j] = max(e[i-1, j], e[i, j-1])
+    return e[-1,-1]
 
 if __name__ == "__main__":
     """arr = np.random.permutation(1000)
@@ -226,18 +247,29 @@ if __name__ == "__main__":
         #time.sleep(0.1)
         print(f, key)"""
 
-    while True:
-        arr = np.random.permutation(100)
+    """while True:
+        arr = np.random.permutation(10)
         print(arr)
-        for key in range(100):
+        for key in range(10):
             f = qsel5_nr(arr, key)
             print(f, key)
             if f != key:
                 print("Error qsel_nr. ", f, key)
                 time.sleep(10)
+"""
 
-"""
-[6 3 2 5 0 4 7 9 8 1]
-[4 7 1 2 5 8 6 9 0 3]
-[5 7 8 9 4 2 0 6 3 1]
-"""
+    """arr = np.random.permutation(100)
+    print(arr)
+    ord = qsort_5(arr)
+    print(ord)
+    for x, y in enumerate(ord):
+        if x!=y:
+            print("ERROR")
+            time.sleep(10)
+    print("OK")"""
+
+    y = "qwertyluiolp"
+    x = "helolo"
+
+    dist = edit_distance(x, y)
+    print (f'Edit distance:{dist}')
