@@ -190,24 +190,15 @@ def qsort_5(t: np.ndarray) -> np.ndarray:
         aux[index] = elem
     return aux
 
-def edit_distance(str1:str, str2:str)->int:
-    """ Calculate edit distance between sequences x and y using
-    matrix dynamic programming. Return dist matrix. """
-    
+def edit_distance(str1:str, str2:str)->int:    
     dist = np.zeros((len(str1)+1, len(str2)+1), dtype=int)
     dist[0, 1:] = range(1, len(str2)+1)
     dist[1:, 0] = range(1, len(str1)+1)
     
     for i in range(1, len(str1)+1):
         for j in range(1, len(str2)+1):
-            # str1[i] == str2[j]
-            if (str1[i-1] == str2[j-1]):
-                dist[i,j] = dist[i-1, j-1]
-                
-            # str1[i] != str2[j]
-            else :
-                dist[i, j] = min(dist[i-1, j-1]+1, dist[i-1, j]+1, dist[i, j-1]+1)
-    
+            dist[i, j] = dist[i-1, j-1] if str1[i-1] == str2[j-1] else 1 + min(dist[i-1, j-1], dist[i-1, j], dist[i, j-1])
+
     return dist[-1,-1]
 
 def max_subsequence_length(x:str, y:str)->int:
