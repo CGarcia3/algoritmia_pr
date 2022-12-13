@@ -244,10 +244,24 @@ def max_common_subsequence(str_1: str, str_2: str) -> str:
     return sc
 
 def min_mult_matrix(l_dims: List[int]) -> int:
-    mult = np.ones((len(l_dims)-1,len(l_dims)-1)) * np.inf
+    mult = np.ones((len(l_dims),len(l_dims))) * np.inf
     mult[0, 0] = 0
-    for i in range(1, len(l_dims)-1):
-        for j in range(1, len(l_dims)-1):
+
+    """Multiply a matrix for itself = 0"""
+    for i in range(len(l_dims)):
+        mult[i][i] = 0
+
+    """Matrix dimension A is l_dims[i-1] x l_dims[i]"""
+    for i in range(1, len(l_dims)):
+        for j in range(1, len(l_dims)):
+            for k in range(i, j):
+                cost = mult[i][k] + mult[k + 1][j] + l_dims[i - 1] * l_dims[k] * l_dims[j]
+                print(cost)
+                if cost < mult[i][j]:
+                    mult[i][j] = cost
+
+    print(mult)
+    return mult[1][len(l_dims) - 1]
             
 
 if __name__ == "__main__":
