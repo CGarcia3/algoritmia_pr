@@ -190,7 +190,7 @@ def qsort_5(t: np.ndarray) -> np.ndarray:
         aux[index] = elem
     return aux
 
-def edit_distance(str1:str, str2:str)->int:    
+def edit_distance(str1: str, str2: str) -> int:    
     dist = np.zeros((len(str1)+1, len(str2)+1), dtype=int)
     dist[0, 1:] = range(1, len(str2)+1)
     dist[1:, 0] = range(1, len(str1)+1)
@@ -201,22 +201,54 @@ def edit_distance(str1:str, str2:str)->int:
 
     return dist[-1,-1]
 
-def max_subsequence_length(x:str, y:str)->int:
-    """ Calculate  the LCS length between sequences x and y using
-    matrix dynamic programming. Return matrix. """
+def max_subsequence_length(str_1: str, str_2: str) -> int:    
+    lth = np.zeros((len(str_1)+1, len(str_2)+1), dtype=int)
     
-    e = np.zeros((len(x)+1, len(y)+1), dtype=int)
+    for i in range(1, len(str_1)+1):
+        for j in range(1, len(str_2)+1):
+            lth[i, j] = 1 + lth[i-1, j-1] if str_1[i-1] == str_2[j-1] else max(lth[i-1, j], lth[i, j-1])
+    print(lth)
+    return lth[-1, -1]
+
+def max_ind(indList:List) -> int:
+    max_val = max(indList)
+    max_ind = indList.index(max_val)
+    return max_ind
+
+def max_common_subsequence(str_1: str, str_2: str) -> str:
+    lth = np.zeros((len(str_1)+1, len(str_2)+1), dtype=int)
+    move_matrix = np.empty((len(str_1)+1, len(str_2)+1), dtype=str)
     
-    for i in range(1, len(x)+1):
-        for j in range(1, len(y)+1):
-            # x[i] == y[j]
-            if (x[i-1] == y[j-1]):
-                e[i,j] = 1 + e[i-1, j-1]
-                
-            # x[i] != y[j]    
-            else :
-                e[i, j] = max(e[i-1, j], e[i, j-1])
-    return e[-1,-1]
+    for i in range(1, len(str_1)+1):
+        for j in range(1, len(str_2)+1):
+            if str_1[i-1] == str_2[j-1]:
+                lth[i, j] = 1 + lth[i-1, j-1]
+                move_matrix[i,j] = 'D'
+            else:
+                lth[i,j] = max(lth[i-1, j], lth[i, j-1])
+                ind = max_ind((lth[i-1, j], lth[i, j-1]))
+                move_matrix[i,j] = 'U' if ind else 'L'
+    print(move_matrix)
+    print(lth)
+
+    sc = ""
+    while move_matrix[i, j] != '':
+        if move_matrix[i, j] == 'D':
+            i, j = i-1, j-1
+            sc = str_1[i] + sc
+        elif move_matrix[i, j] == 'U':
+            j = j-1
+        elif move_matrix[i, j] == 'L':
+            i = i-1 
+        print(i, j)
+    return sc
+
+def min_mult_matrix(l_dims: List[int]) -> int:
+    mult = np.ones((len(l_dims)-1,len(l_dims)-1)) * np.inf
+    mult[0, 0] = 0
+    for i in range(1, len(l_dims)-1):
+        for j in range(1, len(l_dims)-1):
+            
 
 if __name__ == "__main__":
     """arr = np.random.permutation(1000)

@@ -1,4 +1,5 @@
 import numpy as np
 
-array = [0, 2, 6, 5, 8, 10]
-print(np.median(array))
+lth = np.zeros((3, 10), dtype=int)
+lth[0, 2] = 1
+print(lth)
