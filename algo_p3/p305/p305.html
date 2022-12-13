@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module p305</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>p305</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/carlos/algoritmia_pr/algo_p3/p305/p305.py">/home/carlos/algoritmia_pr/algo_p3/p305/p305.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-edit_distance"><strong>edit_distance</strong></a>(str1: str, str2: str) -&gt; int</dt><dd><tt>Function&nbsp;that&nbsp;returns&nbsp;the&nbsp;edit&nbsp;distance&nbsp;between<br>
+two&nbsp;strings.<br>
+&nbsp;<br>
+**Params:**&nbsp;string,&nbsp;string&nbsp;(The&nbsp;two&nbsp;strings&nbsp;needed&nbsp;for<br>
+the&nbsp;calculation)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(The&nbsp;edit&nbsp;distance)</tt></dd></dl>
+ <dl><dt><a name="-max_common_subsequence"><strong>max_common_subsequence</strong></a>(str_1: str, str_2: str) -&gt; str</dt><dd><tt>Function&nbsp;that&nbsp;returns&nbsp;the&nbsp;longest<br>
+subsequence&nbsp;between&nbsp;two&nbsp;strings.<br>
+&nbsp;<br>
+**Params:**&nbsp;string,&nbsp;string&nbsp;(The&nbsp;two&nbsp;strings&nbsp;needed&nbsp;for<br>
+the&nbsp;calculation)<br>
+&nbsp;<br>
+**Return:**&nbsp;string&nbsp;(The&nbsp;subsequence)</tt></dd></dl>
+ <dl><dt><a name="-max_ind"><strong>max_ind</strong></a>(indList: List) -&gt; int</dt><dd><tt>Function&nbsp;that&nbsp;returns&nbsp;index&nbsp;of&nbsp;the&nbsp;biggest&nbsp;value&nbsp;in<br>
+a&nbsp;list.<br>
+&nbsp;<br>
+**Params:**&nbsp;list&nbsp;(A&nbsp;list&nbsp;containing&nbsp;numeric&nbsp;values)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(The&nbsp;index&nbsp;of&nbsp;the&nbsp;biggest&nbsp;value)</tt></dd></dl>
+ <dl><dt><a name="-max_subsequence_length"><strong>max_subsequence_length</strong></a>(str_1: str, str_2: str) -&gt; int</dt><dd><tt>Function&nbsp;that&nbsp;returns&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;longest<br>
+subsequence&nbsp;between&nbsp;two&nbsp;strings.<br>
+&nbsp;<br>
+**Params:**&nbsp;string,&nbsp;string&nbsp;(The&nbsp;two&nbsp;strings&nbsp;needed&nbsp;for<br>
+the&nbsp;calculation)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(The&nbsp;length&nbsp;of&nbsp;the&nbsp;subsequence)</tt></dd></dl>
+ <dl><dt><a name="-min_mult_matrix"><strong>min_mult_matrix</strong></a>(l_dims: List[int]) -&gt; int</dt><dd><tt>Function&nbsp;that&nbsp;checks&nbsp;the&nbsp;best&nbsp;possible<br>
+order&nbsp;to&nbsp;mutiply&nbsp;several&nbsp;matrix.<br>
+&nbsp;<br>
+**Params:**&nbsp;List[int]&nbsp;(list&nbsp;where&nbsp;the&nbsp;first<br>
+element&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;rows&nbsp;of&nbsp;first&nbsp;matrix<br>
+and&nbsp;then&nbsp;the&nbsp;columns&nbsp;of&nbsp;the&nbsp;succesive&nbsp;matrix)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(The&nbsp;minimal&nbsp;number&nbsp;of<br>
+multiplications&nbsp;that&nbsp;will&nbsp;be&nbsp;performed&nbsp;)</tt></dd></dl>
+ <dl><dt><a name="-pivot5"><strong>pivot5</strong></a>(t: numpy.ndarray) -&gt; int</dt><dd><tt>Function&nbsp;that&nbsp;gets&nbsp;the&nbsp;median&nbsp;of&nbsp;medians<br>
+that&nbsp;will&nbsp;be&nbsp;the&nbsp;pivot&nbsp;for&nbsp;the&nbsp;selection.<br>
+&nbsp;<br>
+**Params:**&nbsp;array&nbsp;(Array&nbsp;where&nbsp;the&nbsp;pivot<br>
+is&nbsp;going&nbsp;to&nbsp;be&nbsp;selected)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(The&nbsp;index&nbsp;of&nbsp;the&nbsp;pivot)</tt></dd></dl>
+ <dl><dt><a name="-qsel"><strong>qsel</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>Recursive&nbsp;function&nbsp;that&nbsp;finds&nbsp;the&nbsp;k-th&nbsp;element&nbsp;of&nbsp;the<br>
+given&nbsp;array&nbsp;if&nbsp;it&nbsp;was&nbsp;ordered.<br>
+&nbsp;<br>
+**Params:**&nbsp;array,&nbsp;int&nbsp;(The&nbsp;array&nbsp;containing&nbsp;the&nbsp;values,<br>
+and&nbsp;the&nbsp;k&nbsp;index)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(element&nbsp;in&nbsp;the&nbsp;k-th&nbsp;position)</tt></dd></dl>
+ <dl><dt><a name="-qsel5_nr"><strong>qsel5_nr</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>Implementation&nbsp;of&nbsp;the&nbsp;non&nbsp;recursive&nbsp;quick&nbsp;select<br>
+algorithm&nbsp;using&nbsp;pivot5&nbsp;function.<br>
+&nbsp;<br>
+**Params:**&nbsp;array,&nbsp;int&nbsp;(The&nbsp;array&nbsp;containing&nbsp;the&nbsp;values,<br>
+and&nbsp;the&nbsp;value&nbsp;to&nbsp;look&nbsp;for)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(the&nbsp;index&nbsp;that&nbsp;the&nbsp;key&nbsp;would&nbsp;use&nbsp;in<br>
+a&nbsp;sorted&nbsp;version&nbsp;of&nbsp;the&nbsp;array)&nbsp;or&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-qsel_nr"><strong>qsel_nr</strong></a>(t: numpy.ndarray, k: int) -&gt; Optional[int]</dt><dd><tt>Implementation&nbsp;of&nbsp;the&nbsp;qsel&nbsp;function&nbsp;without&nbsp;the&nbsp;tail<br>
+recursion.<br>
+&nbsp;<br>
+**Params:**&nbsp;array,&nbsp;int&nbsp;(The&nbsp;array&nbsp;containing&nbsp;the&nbsp;values,<br>
+and&nbsp;the&nbsp;k&nbsp;index)<br>
+&nbsp;<br>
+**Return:**&nbsp;int&nbsp;(element&nbsp;in&nbsp;the&nbsp;k-th&nbsp;position)</tt></dd></dl>
+ <dl><dt><a name="-qsort_5"><strong>qsort_5</strong></a>(t: numpy.ndarray) -&gt; numpy.ndarray</dt><dd><tt>Function&nbsp;that&nbsp;sorts&nbsp;an&nbsp;array&nbsp;using&nbsp;the&nbsp;&nbsp;qsel5_nr<br>
+in&nbsp;every&nbsp;element&nbsp;of&nbsp;the&nbsp;array<br>
+&nbsp;<br>
+**Params:**&nbsp;array&nbsp;(The&nbsp;array&nbsp;to&nbsp;be&nbsp;sorted)<br>
+&nbsp;<br>
+**Return:**&nbsp;array&nbsp;(The&nbsp;sorted&nbsp;array)</tt></dd></dl>
+ <dl><dt><a name="-split"><strong>split</strong></a>(t: numpy.ndarray) -&gt; Tuple[numpy.ndarray, int, numpy.ndarray]</dt><dd><tt>Splits&nbsp;a&nbsp;given&nbsp;array&nbsp;into&nbsp;two&nbsp;arrays&nbsp;each&nbsp;containing<br>
+the&nbsp;smaller&nbsp;and&nbsp;bigger&nbsp;values&nbsp;in&nbsp;regard&nbsp;to&nbsp;the&nbsp;first&nbsp;element<br>
+of&nbsp;the&nbsp;array.<br>
+&nbsp;<br>
+**Params:**&nbsp;array&nbsp;(The&nbsp;array&nbsp;to&nbsp;split)<br>
+&nbsp;<br>
+**Return:**&nbsp;Tuple(array,&nbsp;int,&nbsp;array)&nbsp;(The&nbsp;two&nbsp;arrays&nbsp;that&nbsp;result<br>
+after&nbsp;the&nbsp;split,&nbsp;and&nbsp;the&nbsp;value&nbsp;used&nbsp;to&nbsp;split&nbsp;the&nbsp;array)</tt></dd></dl>
+ <dl><dt><a name="-split_pivot"><strong>split_pivot</strong></a>(t: numpy.ndarray, mid: int) -&gt; Tuple[numpy.ndarray, int, numpy.ndarray]</dt><dd><tt>Function&nbsp;that&nbsp;splits&nbsp;the&nbsp;array&nbsp;into&nbsp;two&nbsp;othe&nbsp;arrays<br>
+containig&nbsp;the&nbsp;values&nbsp;greater&nbsp;and&nbsp;lower&nbsp;than&nbsp;t[mid].<br>
+&nbsp;<br>
+**Params:**&nbsp;array,&nbsp;int&nbsp;(The&nbsp;array&nbsp;containing&nbsp;the&nbsp;values,<br>
+and&nbsp;the&nbsp;mid&nbsp;index&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;pivot)<br>
+&nbsp;<br>
+**Return:**&nbsp;(array,&nbsp;int,&nbsp;array)&nbsp;(tuple&nbsp;containing&nbsp;the<br>
+two&nbsp;splitted&nbsp;arrays&nbsp;and&nbsp;the&nbsp;pivot)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Callable</strong> = typing.Callable<br>
+<strong>Dict</strong> = typing.Dict<br>
+<strong>Iterable</strong> = typing.Iterable<br>
+<strong>List</strong> = typing.List<br>
+<strong>Tuple</strong> = typing.Tuple<br>
+<strong>Union</strong> = typing.Union</td></tr></table>
+</body></html>
